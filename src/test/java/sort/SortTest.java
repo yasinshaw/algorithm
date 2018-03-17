@@ -18,12 +18,12 @@ public class SortTest {
      */
     @Before
     public void initArray() {
-        arr = new Integer[200];
+        arr = new Integer[20000];
         Random random = new Random();
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt(10000);
         }
-        sortedArr = new Integer[200];
+        sortedArr = new Integer[20000];
         System.arraycopy(arr, 0, sortedArr, 0, arr.length);
         Arrays.sort(sortedArr);
     }
