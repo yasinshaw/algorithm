@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class MyLinkedListTest {
 
     @Test
-    public void insert() throws Exception {
+    public void test() throws Exception {
         IList<Integer> list = new MyLinkedList<>();
         list.insert(0, 1);
         list.insert(0, 2);
