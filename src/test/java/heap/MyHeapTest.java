@@ -50,7 +50,7 @@ public class MyHeapTest {
 
     @Test
     public void remove() throws Exception {
-        assertTrue(heap.remove(3) == 4);
+        assertTrue(heap.remove(1) == 2);
     }
 
     @Test

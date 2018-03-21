@@ -24,10 +24,6 @@ public class MyHeap<T> implements IHeap<T> {
             sink(k);
         // 对最后一层，也就是后半部分，不断交换到堆顶，再下沉
         int k = count;
-        while (k > 1) {
-            exchange(1, k--);
-            sink(1);
-        }
     }
 
     @Override
@@ -60,7 +56,8 @@ public class MyHeap<T> implements IHeap<T> {
         if (i < 1 || i > count)
             throw new RuntimeException("下标非法");
         T res = datas[i];
-        datas[i] = datas[count--];
+        datas[i] = datas[count];
+        datas[count--] = null; // 防止对象游离
         sink(i);
         return res;
     }
