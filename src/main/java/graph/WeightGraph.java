@@ -38,6 +38,8 @@ public class WeightGraph {
      * @param weight 权重
      */
     public void addEdge(int v, int w, double weight) {
+        checkIndex(v);
+        checkIndex(w);
         this.addEdge(new Edge(v, w, weight));
     }
 
@@ -48,6 +50,8 @@ public class WeightGraph {
     public void addEdge(Edge edge) {
         int v = edge.getV();
         int w = edge.getW();
+        checkIndex(v);
+        checkIndex(w);
         adj[v].add(edge);
         // 这里 v != w 是为了防止闭环图
         if (v != w && !directed)
@@ -61,6 +65,7 @@ public class WeightGraph {
      * @return v的邻边
      */
     public List<Edge> edgeAdj(int v) {
+        checkIndex(v);
         return adj[v];
     }
 
@@ -84,6 +89,17 @@ public class WeightGraph {
      * @return true表示v到w有边
      */
     public boolean hasEdge(int v, int w) {
+        checkIndex(v);
+        checkIndex(w);
         return adj[v].stream().anyMatch(i -> i.getW() == w);
+    }
+
+    /**
+     * 检查顶点的位置是否合法
+     * @param v 顶点的索引
+     */
+    private void checkIndex(int v) {
+        if (v < 0 || v > this.v)
+            throw new RuntimeException("位置 " +  v + " 不合法");
     }
 }

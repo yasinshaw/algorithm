@@ -37,6 +37,8 @@ public class NonWeightGraph {
      * @param w 顶点w
      */
     public void addEdge(int v, int w) {
+        checkIndex(v);
+        checkIndex(w);
         adj[v].add(w);
         // 这里 v != w 是为了防止闭环图
         if (v != w && !directed)
@@ -50,6 +52,7 @@ public class NonWeightGraph {
      * @return 顶点v的邻边
      */
     public List<Integer> edgeAdj(int v) {
+        checkIndex(v);
         return adj[v];
     }
 
@@ -60,6 +63,17 @@ public class NonWeightGraph {
      * @return true表示v到w有边
      */
     public boolean hasEdge(int v, int w) {
+        checkIndex(v);
+        checkIndex(w);
         return adj[v].stream().anyMatch(i -> i == w);
+    }
+
+    /**
+     * 检查顶点的位置是否合法
+     * @param v 顶点的索引
+     */
+    private void checkIndex(int v) {
+        if (v < 0 || v > this.v)
+            throw new RuntimeException("位置 " +  v + " 不合法");
     }
 }
