@@ -19,8 +19,9 @@ public class NonWeightGraph {
         this.directed = directed;
         this.v = v;
         adj = new List[v];
-        for (List vList : adj)
-            vList = new LinkedList();
+        for (int i = 0; i < adj.length; i++) {
+            adj[i] = new LinkedList<>();
+        }
     }
 
     public int v() {
