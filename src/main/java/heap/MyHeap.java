@@ -22,8 +22,6 @@ public class MyHeap<T> implements IHeap<T> {
         // 对前半部分逆序下沉，构造堆
         for (int k = count / 2; k >= 1; k--)
             sink(k);
-        // 对最后一层，也就是后半部分，不断交换到堆顶，再下沉
-        int k = count;
     }
 
     @Override
@@ -79,6 +77,11 @@ public class MyHeap<T> implements IHeap<T> {
         return comparator.compare(datas[i], datas[j]) < 0;
     }
 
+    /**
+     * 交换两个数
+     * @param i 第一个数的位置
+     * @param j 第二个数的位置
+     */
     private void exchange(int i, int j) {
         T temp = datas[i];
         datas[i] = datas[j];
