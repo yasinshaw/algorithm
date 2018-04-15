@@ -13,6 +13,9 @@ public class MyIndexHeap<T> implements IHeap<T> {
         this.datas = (T[]) new Object[capacity + 1];
         // 为索引开辟空间
         this.indexes = new int[capacity + 1];
+        for (int i = 0; i < capacity + 1; i++) {
+            indexes[i] = i;
+        }
         this.comparator = comparator;
     }
 
@@ -56,6 +59,18 @@ public class MyIndexHeap<T> implements IHeap<T> {
         return remove(1);
     }
 
+    /**
+     * 弹出堆顶元素的索引
+     * @return 堆顶元素的索引
+     */
+    public int popMinIndex() {
+        int index = indexes[1];
+        exchange(1, count);
+        count --;
+        sink(1);
+        return index;
+    }
+
     @Override
     public T remove(int i) {
         if (isEmpty())
@@ -77,13 +92,43 @@ public class MyIndexHeap<T> implements IHeap<T> {
     }
 
     /**
+     * 插入一个数据
+     * @param i 索引位置
+     * @param data 数据
+     */
+    public void insert(int i, T data) {
+        if (count == datas.length - 1)
+            throw new RuntimeException("堆已满");
+        if (i < 1 || i >= datas.length)
+            throw new RuntimeException("下标非法");
+        datas[i] = data;
+        indexes[count + 1] = i;
+        count++;
+        swim(count);
+    }
+
+    public void update(int i, T data) {
+        if (count == datas.length - 1)
+            throw new RuntimeException("堆已满");
+        if (i < 1 || i >= datas.length)
+            throw new RuntimeException("下标非法");
+        datas[i] = data;
+    }
+
+    /**
      * 比较两个数，看谁上浮
      * @param i 第一个数
      * @param j 第二个数
      * @return true 为i上浮， false 为j上浮
      */
     private boolean needSwim(int i, int j) {
-        return comparator.compare(datas[indexes[i]], datas[indexes[j]]) < 0;
+        T a = datas[indexes[i]];
+        T b = datas[indexes[j]];
+        if (a == null)
+            return false;
+        if (b == null)
+            return true;
+        return comparator.compare(a, b) < 0;
     }
 
     private void exchange(int i, int j) {

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * LazyPrim最小生成树算法
+ * 复杂度为ElgE级别
  * @author yasin
  * @version v1.0
  * @date 2018/4/14

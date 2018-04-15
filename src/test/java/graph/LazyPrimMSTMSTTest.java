@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * @version v1.0
  * @date 2018/4/14
  */
-public class LazyPrimMSTTest {
+public class LazyPrimMSTMSTTest {
 
     @Test
     public void getMst() {
@@ -36,9 +36,9 @@ public class LazyPrimMSTTest {
 
         LazyPrimMST lazyPrimMST = new LazyPrimMST(g);
         List<Edge> mst = lazyPrimMST.mst;
-//        mst.forEach( x -> {
-//            System.out.println(String.format("%d-%d: %.2f", x.getV(), x.getW(), x.getWeight()));
-//        });
+        mst.forEach( x -> {
+            System.out.println(String.format("%d-%d: %.2f", x.getV(), x.getW(), x.getWeight()));
+        });
         assertTrue(mst.size() == 7);
         assertTrue(mst.get(0).getWeight() == 0.16);
         assertTrue(mst.get(1).getWeight() == 0.19);
