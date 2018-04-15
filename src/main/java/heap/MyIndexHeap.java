@@ -56,7 +56,7 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     @Override
     public T pop() {
-        return remove(1);
+        return remove(0);
     }
 
     /**
@@ -68,19 +68,20 @@ public class MyIndexHeap<T> implements IHeap<T> {
         exchange(1, count);
         count --;
         sink(1);
-        return index;
+        return index - 1;
     }
 
     @Override
     public T remove(int i) {
+        int j = i + 1;
         if (isEmpty())
             throw new RuntimeException("堆为空");
-        if (i < 1 || i > count)
+        if (j < 1 || j > count)
             throw new RuntimeException("下标非法");
-        T res = datas[indexes[i]];
-        datas[indexes[i]] = datas[indexes[count]];
+        T res = datas[indexes[j]];
+        datas[indexes[j]] = datas[indexes[count]];
         datas[indexes[count--]] = null; // 防止对象游离
-        sink(i);
+        sink(j);
         return res;
     }
 
@@ -97,22 +98,18 @@ public class MyIndexHeap<T> implements IHeap<T> {
      * @param data 数据
      */
     public void insert(int i, T data) {
+        int j = i + 1;
         if (count == datas.length - 1)
             throw new RuntimeException("堆已满");
-        if (i < 1 || i >= datas.length)
+        if (j < 1 || j >= datas.length)
             throw new RuntimeException("下标非法");
-        datas[i] = data;
-        indexes[count + 1] = i;
-        count++;
-        swim(count);
-    }
+        if (datas[j] == null) {
+            datas[j ] = data;
+            indexes[count + 1] = j;
+            count++;
+            swim(count);
+        } else datas[j] = data;
 
-    public void update(int i, T data) {
-        if (count == datas.length - 1)
-            throw new RuntimeException("堆已满");
-        if (i < 1 || i >= datas.length)
-            throw new RuntimeException("下标非法");
-        datas[i] = data;
     }
 
     /**

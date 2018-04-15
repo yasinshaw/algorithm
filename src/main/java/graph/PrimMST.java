@@ -43,13 +43,8 @@ public class PrimMST {
                 // 如果这个邻接点没有被标记，说明找到了横切边。
                 int w = x.getOther(v);
                 if (!marked[w]) {
-                    if (edgeTo[w] == null) {
-                        heap.insert(w, x);
-                        edgeTo[w] = x;
-                    } else if (edgeTo[w].compareTo(x) > 0) {
-                        heap.update(w, x);
-                        edgeTo[w] = x;
-                    }
+                    heap.insert(w, x);
+                    edgeTo[w] = x;
                 }
             });
         }
