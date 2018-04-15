@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * 优化的Prim算法
+ * 复杂度为ElgV级别
  * @author yasin
  * @version v1.0
  * @date 2018/4/14
