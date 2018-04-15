@@ -42,7 +42,8 @@ public class PrimMST {
             g.edgeAdj(v).stream().forEach( x -> {
                 // 如果这个邻接点没有被标记，说明找到了横切边。
                 int w = x.getOther(v);
-                if (!marked[w]) {
+                Edge edge = heap.get(w);
+                if (!marked[w] && (edge == null || x.getWeight() < edge.getWeight())) {
                     heap.insert(w, x);
                     edgeTo[w] = x;
                 }

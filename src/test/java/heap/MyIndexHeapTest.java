@@ -79,4 +79,10 @@ public class MyIndexHeapTest {
         assertTrue(heap.size() == 5);
 //        assertTrue(heap.popMinIndex() == 6);
     }
+
+    @Test
+    public void get() {
+        assertTrue(heap.get(0) == 5);
+        assertTrue(heap.get(3) == 11);
+    }
 }

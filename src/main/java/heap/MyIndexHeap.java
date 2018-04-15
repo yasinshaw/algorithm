@@ -65,6 +65,7 @@ public class MyIndexHeap<T> implements IHeap<T> {
      */
     public int popMinIndex() {
         int index = indexes[1];
+        datas[index] = null;
         exchange(1, count);
         count --;
         sink(1);
@@ -110,6 +111,10 @@ public class MyIndexHeap<T> implements IHeap<T> {
             swim(count);
         } else datas[j] = data;
 
+    }
+
+    public T get(int i) {
+        return datas[i + 1];
     }
 
     /**
