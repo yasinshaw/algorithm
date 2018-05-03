@@ -10,7 +10,7 @@ import java.util.Queue;
  * @version v1.0
  * @date 2018/4/20
  */
-public class BST<K extends Comparable<K>, V> {
+public class BinarySearchTree<K extends Comparable<K>, V> {
     private Node root; // 二叉查找树的根节点
 
     private class Node {
