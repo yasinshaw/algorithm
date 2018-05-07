@@ -3,6 +3,9 @@ package search;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
@@ -23,51 +26,62 @@ public class BinarySearchTreeTest {
 
     @Test
     public void size() {
-        System.out.println(binarySearchTree.size());
         assertTrue(binarySearchTree.size() == 3);
     }
 
     @Test
     public void get() {
+        assertThat(binarySearchTree.get(2), is(2));
     }
 
     @Test
     public void put() {
+        binarySearchTree.put(4, 4);
+        assertThat(binarySearchTree.size(), is(4));
     }
 
     @Test
     public void min() {
+        assertThat(binarySearchTree.min(), is(1));
     }
 
     @Test
     public void max() {
+        assertThat(binarySearchTree.max(), is(3));
     }
 
     @Test
     public void floor() {
+        assertThat(binarySearchTree.floor(2), is(2));
     }
 
     @Test
     public void select() {
+        assertThat(binarySearchTree.select(2), is(2));
     }
 
     @Test
     public void rank() {
+        assertThat(binarySearchTree.rank(2), is(2));
     }
 
     @Test
     public void deleteMin() {
+        binarySearchTree.deleteMin();
+        assertThat(binarySearchTree.min(), is(2));
     }
 
     @Test
     public void delete() {
+        binarySearchTree.delete(2);
+        assertThat(binarySearchTree.size(), is(2));
+        assertNull(binarySearchTree.get(2));
     }
 
     @Test
     public void keys() {
-    }
-
-    @Test
-    public void keys1() {
+        Iterator<Integer> integerIterator = binarySearchTree.keys().iterator();
+        assertThat(integerIterator.next(), is(1));
+        assertThat(integerIterator.next(), is(2));
     }
 }

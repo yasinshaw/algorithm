@@ -106,15 +106,15 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
 
     // 得到第k大的值
-    public Node select(int k) {
-        return select(root, k);
+    public V select(int k) {
+        return select(root, k).value;
     }
 
     private Node select(Node x, int k) {
         if (x == null) return null;
-        int t = size(x.left);
+        int t = size(x.left) + 1;
         if (t > k) return select(x.left, k);
-        else if (t < k) return select(x.right, k - t - 1);
+        else if (t < k) return select(x.right, k - t);
         else return x;
     }
 
@@ -128,7 +128,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         int cmp = key.compareTo(x.key);
         if (cmp < 0) return rank(x.left, key);
         else if (cmp > 0) return 1 + size(x.left) + rank(x.right, key);
-        else return size(x.left);
+        else return size(x.left) + 1;
     }
 
     // 删除最小值
