@@ -52,7 +52,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
     // 插入操作
     public void put(K key, V value) {
-        put(root, key, value);
+        root = put(root, key, value);
     }
 
     private Node put(Node x, K key, V value) {
