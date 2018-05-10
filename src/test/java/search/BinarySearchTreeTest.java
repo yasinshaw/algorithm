@@ -11,13 +11,12 @@ import static org.junit.Assert.*;
 /**
  * @author yasin
  * @version v1.0
- * @date 2018/4/27
  */
 public class BinarySearchTreeTest {
 
     private BinarySearchTree<Integer, Integer> binarySearchTree;
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         binarySearchTree = new BinarySearchTree<>();
         binarySearchTree.put(1, 1);
         binarySearchTree.put(2, 2);
@@ -26,62 +25,62 @@ public class BinarySearchTreeTest {
 
     @Test
     public void size() {
-        assertTrue(binarySearchTree.size() == 3);
+        assertEquals(3, binarySearchTree.size());
     }
 
     @Test
     public void get() {
-        assertThat(binarySearchTree.get(2), is(2));
+        assertEquals(2, (int)binarySearchTree.get(2));
     }
 
     @Test
     public void put() {
         binarySearchTree.put(4, 4);
-        assertThat(binarySearchTree.size(), is(4));
+        assertEquals(4, (int)binarySearchTree.size());
     }
 
     @Test
     public void min() {
-        assertThat(binarySearchTree.min(), is(1));
+        assertEquals(1, (int)binarySearchTree.min());
     }
 
     @Test
     public void max() {
-        assertThat(binarySearchTree.max(), is(3));
+        assertEquals(3, (int)binarySearchTree.max());
     }
 
     @Test
     public void floor() {
-        assertThat(binarySearchTree.floor(2), is(2));
+        assertEquals(2, (int)binarySearchTree.floor(2));
     }
 
     @Test
     public void select() {
-        assertThat(binarySearchTree.select(2), is(2));
+        assertEquals(2, (int)binarySearchTree.select(2));
     }
 
     @Test
     public void rank() {
-        assertThat(binarySearchTree.rank(2), is(2));
+        assertEquals(2, binarySearchTree.rank(2));
     }
 
     @Test
     public void deleteMin() {
         binarySearchTree.deleteMin();
-        assertThat(binarySearchTree.min(), is(2));
+        assertEquals(2, (int)binarySearchTree.min());
     }
 
     @Test
     public void delete() {
         binarySearchTree.delete(2);
-        assertThat(binarySearchTree.size(), is(2));
+        assertEquals(2, (int)binarySearchTree.size());
         assertNull(binarySearchTree.get(2));
     }
 
     @Test
     public void keys() {
         Iterator<Integer> integerIterator = binarySearchTree.keys().iterator();
-        assertThat(integerIterator.next(), is(1));
-        assertThat(integerIterator.next(), is(2));
+        assertEquals(1, (int)integerIterator.next());
+        assertEquals(2, (int)integerIterator.next());
     }
 }

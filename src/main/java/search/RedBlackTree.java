@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 二分搜索树
+ * 红黑树
  * @author yasin
  * @version v1.0
  * @date 2018/4/20
@@ -26,14 +26,6 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             this.value = value;
             this.n = n;
             this.color = color;
-        }
-
-        boolean isRed() {
-            return this.color == RED;
-        }
-
-        boolean isBlack() {
-            return this.color = BLACK;
         }
     }
 
@@ -144,7 +136,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     // 删除最小值
     public void deleteMin() {
-        if (root.left.isBlack() && root.right.isBlack())
+        if (isBlack(root.left) && isBlack(root.right))
             root.color = RED;
         root = deleteMin(root);
         if (root != null)
@@ -154,7 +146,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     private Node deleteMin(Node x) {
         if (x.left == null)
             return null;
-        if (x.left.isBlack() && x.left.left.isBlack())
+        if (isBlack(x.left) && isBlack(x.left.left))
             x = moveRedLeft(x);
         x.left = deleteMin(x.left);
         return balance(x);
@@ -162,7 +154,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     // 删除以key为键的值
     public void delete(K key) {
-        if (root.left.isBlack() && root.right.isBlack())
+        if (isBlack(root.left) && isBlack(root.right))
             root.color = RED;
         root = delete(root, key);
         if (root != null)
@@ -171,15 +163,15 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     private Node delete(Node x, K key) {
         if (key.compareTo(x.key) < 0) {
-            if (x.left.isBlack() && x.left.left.isBlack())
+            if (isBlack(x.left) && isBlack(x.left.left))
                 x = moveRedLeft(x);
             x.left = delete(x.left, key);
         } else {
-            if (x.left.isRed())
+            if (isRed(x.left))
                 x = rotateRight(x);
             if (key.compareTo(x.key) == 0 && x.right == null)
                 return null;
-            if (x.right.isBlack() && x.right.left.isBlack())
+            if (isBlack(x.right) && isBlack(x.right.left))
                 x = moveRedRight(x);
             if (key.compareTo(x.key) == 0) {
                 x.value = get(x.right, min(x.right).key);
@@ -244,11 +236,11 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     // 保持平衡
     private Node balance(Node x) {
         // 旋转操作
-        if (x.right.isRed() && x.left.isBlack())
+        if (isRed(x.right) && isBlack(x.left))
             x = rotateLeft(x);
-        if (x.left.isRed() && x.left.left.isRed())
+        if (isRed(x.left) && isRed(x.left.left))
             x = rotateRight(x);
-        if (x.left.isRed() && x.right.isRed())
+        if (isRed(x.left) && isRed(x.right))
             flipColors(x);
 
         x.n = size(x.left) + size(x.right) + 1;
@@ -257,7 +249,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     private Node moveRedLeft(Node head) {
         flipColors(head);
-        if (head.right.left.isRed()) {
+        if (isRed(head.right.left)) {
             head.right = rotateRight(head.right);
             head = rotateLeft(head);
         }
@@ -266,9 +258,17 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     private Node moveRedRight(Node head) {
         flipColors(head);
-        if (head.left.left.isBlack()) {
+        if (isBlack(head.left.left)) {
             head = rotateRight(head);
         }
         return head;
+    }
+
+    private boolean isRed(Node node) {
+        return node != null && node.color == RED;
+    }
+
+    private boolean isBlack(Node node) {
+        return !isRed(node);
     }
 }
