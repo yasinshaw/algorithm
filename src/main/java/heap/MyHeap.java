@@ -49,10 +49,12 @@ public class MyHeap<T> implements IHeap<T> {
 
     @Override
     public T remove(int i) {
-        if (isEmpty())
+        if (isEmpty()) {
             throw new RuntimeException("堆为空");
-        if (i < 1 || i > count)
+        }
+        if (i < 1 || i > count) {
             throw new RuntimeException("下标非法");
+        }
         T res = datas[i];
         datas[i] = datas[count];
         datas[count--] = null; // 防止对象游离
@@ -62,8 +64,9 @@ public class MyHeap<T> implements IHeap<T> {
 
     @Override
     public T peek() {
-        if (isEmpty())
+        if (isEmpty()) {
             throw new RuntimeException("堆为空");
+        }
         return datas[1];
     }
 

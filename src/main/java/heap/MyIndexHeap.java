@@ -12,7 +12,6 @@ public class MyIndexHeap<T> implements IHeap<T> {
     public MyIndexHeap(int capacity, Comparator<T> comparator) {
         this.datas = (T[]) new Object[capacity + 1];
         // 为索引开辟空间
-        this.indexes = new int[capacity + 1];
         for (int i = 0; i < capacity + 1; i++) {
             indexes[i] = i;
         }
@@ -30,8 +29,9 @@ public class MyIndexHeap<T> implements IHeap<T> {
         this.comparator = comparator;
         System.arraycopy(datas, 0, this.datas, 1, count);
         // 对前半部分逆序下沉，构造堆
-        for (int k = count / 2; k >= 1; k--)
+        for (int k = count / 2; k >= 1; k--) {
             sink(k);
+        }
         // 对最后一层，也就是后半部分，不断交换到堆顶，再下沉
         int k = count;
     }
@@ -48,8 +48,9 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     @Override
     public void add(T data) {
-        if (count == datas.length - 1)
+        if (count == datas.length - 1) {
             throw new RuntimeException("堆已满");
+        }
         datas[indexes[++count]] = data;
         swim(count);
     }
@@ -61,13 +62,14 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     /**
      * 弹出堆顶元素的索引
+     *
      * @return 堆顶元素的索引
      */
     public int popMinIndex() {
         int index = indexes[1];
         datas[index] = null;
         exchange(1, count);
-        count --;
+        count--;
         sink(1);
         return index - 1;
     }
@@ -95,7 +97,8 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     /**
      * 插入一个数据
-     * @param i 索引位置
+     *
+     * @param i    索引位置
      * @param data 数据
      */
     public void insert(int i, T data) {
@@ -105,7 +108,7 @@ public class MyIndexHeap<T> implements IHeap<T> {
         if (j < 1 || j >= datas.length)
             throw new RuntimeException("下标非法");
         if (datas[j] == null) {
-            datas[j ] = data;
+            datas[j] = data;
             indexes[count + 1] = j;
             count++;
             swim(count);
@@ -119,6 +122,7 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     /**
      * 比较两个数，看谁上浮
+     *
      * @param i 第一个数
      * @param j 第二个数
      * @return true 为i上浮， false 为j上浮
@@ -141,6 +145,7 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     /**
      * 上浮
+     *
      * @param k 开始上浮的位置
      */
     private void swim(int k) {
@@ -152,6 +157,7 @@ public class MyIndexHeap<T> implements IHeap<T> {
 
     /**
      * 下沉
+     *
      * @param k 开始下沉的位置
      */
     private void sink(int k) {
