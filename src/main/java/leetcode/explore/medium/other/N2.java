@@ -1,6 +1,5 @@
 package leetcode.explore.medium.other;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class N2 {
