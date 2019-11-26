@@ -22,6 +22,7 @@ public class N3 {
     }
 
     public Node removeByRatio(Node head, int a, int b) {
+
         if (a < 1 || a > b) {
             return head;
         }
