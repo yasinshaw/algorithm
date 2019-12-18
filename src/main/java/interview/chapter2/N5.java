@@ -1,5 +1,8 @@
 package interview.chapter2;
 
+/**
+ * 反转部分单向链表
+ */
 public class N5 {
     public Node reversePart(Node head, int from, int to) {
         int len = 0;
